@@ -1,5 +1,6 @@
 package kr.or.basic.controller;
 
+import java.io.File;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import kr.or.basic.domain.Nums;
 
 @Controller
 @RequestMapping(value="/remind", produces = "text/plain; charset=UTF-8")
@@ -33,23 +37,47 @@ public class RemindController {
 	public String ajaxForm() {
 		return "hukForm";
 	}
+	
+	@PostMapping("/huk2") // 일반 submit 기능을 이용한 파일 전송
+	/* form의 name들과 일치하는 class를 만들면 자동으로 매칭되는 값이 해당 객체를 통해 들어감 */
+	public String postHuk2 (Nums nums, 
+							MultipartFile files) throws Exception { 
+	// 객체에 값을 넣어서 한번에 받을 수 있다 (응용: DB용 VO 이용)
+	// 인풋에 지정한 name 속성과 같은 이름의 변수로 구성된 객체class면 자동으로 받아짐
+	// 별도로 지정한 속성이 없는 경우(비동기식처럼 스크립트로 구성하지 않고 그냥 폼데이터로 전송 시) name으로 받아야 됨
+		// dependency injection은 Dao dao = new Dao();처럼 모델 객체를 생성하는 것을 자동화한것
+		System.out.println("들어온 값 : " + nums.toString());
+		System.out.println(files.getOriginalFilename());
+		System.out.println(files.getSize());
+		System.out.println(files.getName());
+		files.transferTo(new File("d:/upload/"+files.getOriginalFilename()));
+		return "error";
+	}
 
-	@PostMapping("/huk")
-	@ResponseBody // AJAX 전용, jsp찾지 말고 바로 브라우저에 responseBody로 전달하라는 뜻인듯...
-					// AJAX 쓰기 전 디버깅 방식
-	public String ajaxMinhuk(String nm_first, String nm_second, String nm_sel) {
+	@PostMapping("/huk") // xhr을 이용한 비동기식 파일 전송(서버편!!)
+	@ResponseBody 	// AJAX 전용, jsp찾지 말고 바로 브라우저에 responseBody로 전달하라는 뜻인듯...
+					// AJAX 쓰기 전 디버깅 방식으로도 사용
+	public String ajaxMinhuk(String nm_first, String nm_second, String nm_sel, MultipartFile uploadFile) { 
+						// FormData를 구성해 보냈으면 보낸 FormData의 속성명으로 받아준다
 		// RequestParam 어노테이션이 없으면 매개변수 값이 없다고 예외가 발생하지는 않는다
 		// RequestParam 자체로 검증하는 절차가 포함됨
+		System.out.println(uploadFile.getOriginalFilename());
+		System.out.println(uploadFile.getSize());
+		System.out.println(uploadFile.getName());
+		
 		System.out.println("ck1: " + nm_first);
 		System.out.println("ck2: " + nm_second);
 		System.out.println("sel: " + nm_sel);
+	
+
 		String result = "";
 		try {
 			int firNum = Integer.parseInt(nm_first);
 			int secNum = Integer.parseInt(nm_second);
 			
-			if (nm_sel.equals(" ")) {
-				// value = "+"인 경우 공백문자로 처리됨
+			if (nm_sel.equals(" ")||nm_sel.equals("+")) {
+				// value = "+"인 경우 공백문자로 처리됨(url인코딩시)
+				// multipart-formdata로 보낼땐 +로 정상적으로 받아짐
 				result = Integer.toString(firNum+secNum);
 			}
 
