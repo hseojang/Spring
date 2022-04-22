@@ -6,6 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -29,5 +33,42 @@ public class AjaxController {
 		
 		
 	}
+	
+	@GetMapping("/ajax/start")
+	public String start() {
+		return "readyForm";
+	}
+	
+	/*
+	 * get : 조회
+	 * post : 생성
+	 * put : 수정
+	 * delete : 삭제
+	 */
+	
+	@GetMapping("/ajax/get")
+	@ResponseBody
+	public String get() {
+		return "get";
+	}
+	
+	@PostMapping("/ajax/post")
+	@ResponseBody
+	public String post() {
+		return "post";
+	}
+	
+	@PutMapping("/ajax/put")
+	@ResponseBody
+	public String put() {
+		return "put";
+	}
+	
+	@DeleteMapping("/ajax/delete")
+	@ResponseBody
+	public String delete() {
+		return "delete";
+	}
+
 
 }

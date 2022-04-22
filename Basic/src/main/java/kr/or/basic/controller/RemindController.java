@@ -55,7 +55,7 @@ public class RemindController {
 	}
 
 	@PostMapping("/huk") // xhr을 이용한 비동기식 파일 전송(서버편!!)
-	@ResponseBody 	// AJAX 전용, jsp찾지 말고 바로 브라우저에 responseBody로 전달하라는 뜻인듯...
+	@ResponseBody 	// AJAX 전용, 리턴 값으로 jsp를 찾지 않고 바로 브라우저에 responseBody로 전달하라는 뜻인듯... = 브라우저에 출력
 					// AJAX 쓰기 전 디버깅 방식으로도 사용
 	public String ajaxMinhuk(String nm_first, String nm_second, String nm_sel, MultipartFile uploadFile) { 
 						// FormData를 구성해 보냈으면 보낸 FormData의 속성명으로 받아준다
