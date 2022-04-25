@@ -58,6 +58,7 @@
 			let formData = new FormData(v_form);
 			
 			// 파일을 보낼 때는 파일 객체를 추가적으로 따로 담아줘야 한다 -> ajax인 경우?
+			// 안담아줄 시 파일 이름과 경로 등 정보만 보냄 파일 내용물은 안감
 			formData.append("uploadFile", v_files.files[0]);
 					
 					
