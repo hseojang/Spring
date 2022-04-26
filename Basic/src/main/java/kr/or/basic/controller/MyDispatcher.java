@@ -7,8 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+// 스프링 내부의 MVC 구현방식 예제
+// 만약 classpath에 같은 이름의 설정파일이 있다면 내용을 일치시켜준다
 
-// .do로 끝나는 url은 다 이 서블릿에서 관리하도록
+// .do로 끝나는 url은 다 이 서블릿에서 관리하도록(@controller, @requestmapping)
 @WebServlet("*.do")
 public class MyDispatcher extends HttpServlet {
 	private static final long serialVersionUID = 1L;

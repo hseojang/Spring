@@ -33,6 +33,7 @@ public class MapperController {
 	@GetMapping(value="/mybatis/insert", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public int insert(String sm_id, String sm_name) {
+		System.out.println("체크!!!" + sm_id + sm_name);
 		return simpleService.insert(sm_id, sm_name);
 	}
 	
@@ -45,7 +46,7 @@ public class MapperController {
 	@GetMapping(value="/mybatis/delete", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public int delete(String sm_id) {
-		System.out.println("체크!!!");
+		//System.out.println("체크!!!");
 		return simpleService.delete(sm_id);
 	}
 	

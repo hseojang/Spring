@@ -22,20 +22,19 @@ public class SimpleServiceImpl implements SimpleService {
 
 	@Override
 	public int insert(String sm_id, String sm_name) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return testMapper.insertSimple(sm_id, sm_name);
 	}
 
 	@Override
 	public int update(String sm_id, String sm_name) {
 		// TODO Auto-generated method stub
-		return 0;
+		return testMapper.updateSimple(sm_id, sm_name);
 	}
 
 	@Override
 	public int delete(String sm_id) {
-		// TODO Auto-generated method stub
-		return 0;
+		return testMapper.deleteSimple(sm_id);
 	}
 	
 
