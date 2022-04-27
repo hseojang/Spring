@@ -32,9 +32,10 @@
 	
 	<beans:bean id="jungsun" class="kr.or.basic.domain.JungSun">
 	<beans:property name="jamba" ref="jamba"/>
-<!-- 	아래 잠바 객체를 참조하는 setJamba -->
+<!-- 	아래 잠바 객체를 참조하는 jungsun 클래스의 jamba 변수 - setJamba -->
 	</beans:bean>
 	<beans:bean id="jamba" class="kr.or.basic.domain.Jamba">
+	<!-- setColor(pink) -->
 	<beans:property name="color" value="pink"/>
 	</beans:bean>
 	

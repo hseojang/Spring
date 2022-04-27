@@ -155,6 +155,14 @@
 			<version>1.2</version>
 		</dependency>
 
+		<!-- HttpClient 서버 우회 툴, 기타 쓸모가 많음 -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.13</version>
+		</dependency>
+
+
 		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
