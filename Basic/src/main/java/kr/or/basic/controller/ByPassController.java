@@ -94,6 +94,7 @@ public class ByPassController {
 	@GetMapping("/utube")
 	@ResponseBody
 	public String getUtubeList(String schWord) throws Exception {
+		System.out.println("검색어 : " + schWord);
 		String url = "https://www.youtube.com/results?search_query="+schWord;
 
 		CloseableHttpClient httpClient = HttpClients.createDefault();
@@ -109,10 +110,10 @@ public class ByPassController {
 	
 
 
-	@GetMapping("/utubeTitle")
+	@GetMapping(value="/utubeTitle", produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public String getUtubeTitle(String schWord) throws Exception {
-		String url = "https://www.youtube.com/"+schWord;
+	public String getUtubeTitle(String schCode) throws Exception {
+		String url = "https://www.youtube.com/watch?v="+schCode;
 
 		CloseableHttpClient httpClient = HttpClients.createDefault();
 		HttpGet getRequest = new HttpGet(url);
