@@ -33,6 +33,14 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-websocket -->
+		<!-- 스프링 웹소켓, 버전은 스프링 프레임워크와 맞춰준다 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-websocket</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+
 
 		<!-- AspectJ -->
 		<dependency>
@@ -42,7 +50,6 @@
 		</dependency>
 
 		<!-- DB관련 -->
-
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>

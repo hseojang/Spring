@@ -7,5 +7,6 @@
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<!-- 이렇게 import 해주면 상황에 따라 모듈처럼 켜고 끄며 사용할 수 있음 -->
+	<!-- 공통적인 것을 담는 root-context -->
 	<import resource="database-context.xml" />
 </beans>

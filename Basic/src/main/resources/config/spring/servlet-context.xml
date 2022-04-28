@@ -8,7 +8,7 @@
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
-	
+	<!-- 웹에 관한 것은 servlet context에 담는다 -->
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
 
@@ -41,8 +41,9 @@
 	
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver"></beans:bean>
 	
+	<beans:import resource="websocket-context.xml" />
 	<context:component-scan base-package="kr.or.basic" />
-	
-	
+
 	
 </beans:beans>
+
