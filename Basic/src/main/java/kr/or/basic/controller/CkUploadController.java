@@ -42,6 +42,9 @@ public class CkUploadController {
 		upload.transferTo(new File(ckUploadPath)); // multipart-config 되어있으면 transferTo를 사용해 바로 옮길 수 있음
 	    log.info("ckUploadPath ===>" + ckUploadPath);
 	    
+	    
+	    Thread.sleep(2000);
+	    
 	    // 전송 되기 전 뷰에서 파일 주소를 요청해서 생기는 404
 	    // 동기처리를 해주면 전체적으로 느려져서 X
 	    

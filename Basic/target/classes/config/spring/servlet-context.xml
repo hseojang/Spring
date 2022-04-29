@@ -34,15 +34,21 @@
 		생성자 인젝션 : 라이브러리로 가져온 외부 클래스 파일들은 어노테이션으로 설정할 수 없으므로 xml이나 java로 직접 등록해야한다.
 	<beans:constructor-arg ref="jamba"/>
 	</beans:bean> -->
+
+<!-- <beans:bean id="jungsun" class="kr.or.basic.domain.JungSun" init-method="initStart" destroy-method="" scope="" >
+	<beans:property name="jamba" ref="jamba"/>-->
+<!--  	아래 잠바 객체를 참조하는 jungsun 클래스의 jamba 변수 - setJamba  -->
+	<!--</beans:bean>-->
+<!-- 	<beans:bean id="jamba" class="kr.or.basic.domain.Jamba"> -->
+<!-- 	 setColor(pink)  -->
+	<!--<beans:property name="color" value="pink"/>
+	</beans:bean>-->
 	
-	<beans:bean id="jungsun" class="kr.or.basic.domain.JungSun">
+		<beans:bean id="jungsun2" class="kr.or.basic.domain.JungSun2" init-method="initStart" destroy-method="" scope="">
 	<beans:property name="jamba" ref="jamba"/>
-<!-- 	아래 잠바 객체를 참조하는 jungsun 클래스의 jamba 변수 - setJamba -->
 	</beans:bean>
-	<beans:bean id="jamba" class="kr.or.basic.domain.Jamba">
-	<!-- setColor(pink) -->
-	<beans:property name="color" value="pink"/>
-	</beans:bean>
+	
+	
 	
 	<!-- 꼭 필요한 건 아닌 데 이런 것도 Bean이 된다는 걸 확인 차원에서 -->
 	<!-- 이렇게 쓰면 경로를 담은 String 객체를 autowired로 가져다 쓸 수 있다-->

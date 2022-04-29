@@ -3,8 +3,10 @@ package kr.or.basic.domain;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+@Qualifier("jungsun")
 @Component /*Spring MVC에서 제공해주는 어노테이션, Bean 생성*/
 public class JungSun implements BlackPink {
 	private String name;
