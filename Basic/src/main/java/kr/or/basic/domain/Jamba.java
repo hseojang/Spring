@@ -1,5 +1,8 @@
 package kr.or.basic.domain;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Jamba {
 	public String color;
 	

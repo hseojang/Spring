@@ -6,17 +6,17 @@ import javax.annotation.PreDestroy;
 import org.springframework.stereotype.Component;
 
 @Component /*Spring MVC에서 제공해주는 어노테이션, Bean 생성*/
-public class JungSun implements BlackPink {
+public class JungSun2 implements BlackPink {
 	private String name;
 	private int age;
 	
 	private Jamba jamba;
 	
-	public JungSun() {
+	public JungSun2() {
 		System.out.println("기본생성자 나 가죽잠바 멋지징?");
 	}
 	
-	public JungSun(Jamba jamba) {
+	public JungSun2(Jamba jamba) {
 		System.out.println("잠바 가져왔나봐 잠바 생성자");
 		this.jamba = jamba;
 	}
@@ -34,7 +34,7 @@ public class JungSun implements BlackPink {
 		this.age = age;
 	}
 
-	public Jamba getJamba() {
+	public Jamba getJamba2() {
 		return jamba;
 	}
 
