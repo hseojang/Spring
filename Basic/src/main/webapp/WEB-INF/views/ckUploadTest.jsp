@@ -35,7 +35,7 @@
 			// 제공되는 API
 			CKEDITOR.instances.id_ta.getData();
 			CKEDITOR.instances.id_ta.setData("<h1>임의로 메시지 삽입</h1>"); // 기존 내용을 교체함
-		}
+		}                         
 		
 		c_changil.onclick = f_click;
 	</script>
