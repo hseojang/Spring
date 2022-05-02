@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -49,8 +50,13 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
+	public String home(Locale locale, Model model, @Value("272") int jojo, String ryu) {
 
+		log.info("ryu? : " + ryu.substring(0)); //NullPointerException
+		
+		log.info("int jojo? : " + jojo);
+		log.info("driverName : " + driverName);
+		
 		log.debug("이것은 디버깅");
 		log.info("이것은 인포");
 		log.warn("이것은 warn");
@@ -71,4 +77,5 @@ public class HomeController {
 		return "ckUploadTest";
 	}
 	
+
 }
