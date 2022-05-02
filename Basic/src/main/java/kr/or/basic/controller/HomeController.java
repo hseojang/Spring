@@ -43,7 +43,7 @@ public class HomeController {
 	@Qualifier("jungsun") // 여기서 생성되는건 xml에서 정의된 bean
 	public BlackPink blackpink;
 	// public BlackPink jungsun; 으로 쓰면 에러 안남
-	// 스프링이 변수명을 읽어와 같은 bean id에 해당하는 객체로 맞추어준다
+	// 스프링이 변수명과 같은 bean id(=객체이름)에 해당하는 객체로 맞추어준다
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
