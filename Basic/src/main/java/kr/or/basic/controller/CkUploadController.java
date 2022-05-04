@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -86,6 +87,37 @@ public class CkUploadController {
 		// fileUrl은 img src="" 안에 들어갈 값임
 	
 		return scriptStr;
+		
+	}
+	
+	
+	@PostMapping(value="/gUpload",produces = "text/html;charset=utf-8") // 한글이 있을 땐 charset이 포함된 방식으로 해줘야함
+	// @PostMapping (value="/gUpload",produces = "application/json;charset=utf-8") // 로 보낼 경우 jQuery 내부 처리 과정에서 실패함
+	@ResponseBody
+	public String gUpload2(HttpServletRequest req,
+			             HttpServletResponse res,
+			             MultipartFile upload) throws Exception {
+
+		log.info("webapp/resources : " + req.getServletContext().getRealPath("/resources"));
+		log.info("webapp/WEB-INF : " + req.getServletContext().getRealPath("/resources/WEB-INF"));
+		log.info("servletContext : " + req.getServletContext());
+		log.info(upload.getOriginalFilename());
+		
+		String realPath = req.getServletContext().getRealPath("/resources/ckUpload"); // 서버가 실제로 파일을 물리적으로 저장하는 경로
+		
+		UUID uid = UUID.randomUUID();
+				
+		String fileName = upload.getOriginalFilename();
+		String ckUploadPath = realPath + "/" + uid + "_" + fileName;
+		upload.transferTo(new File(ckUploadPath)); // multipart-config 되어있으면 transferTo를 사용해 바로 옮길 수 있음
+
+	    // ckeditor를 이용할 때 정해진 부분 : 개발 지침(fileUrl, callBack변수 전송해주기)
+		String callback = req.getParameter("CKEditorFuncNum"); // 뷰의 editor 삽입부에서 form 처리 해주지 않으면 null을 반환함
+
+		
+		String fileUrl = req.getContextPath() + "/ckUpload/" + uid + "_" + fileName; 
+		log.info(fileUrl);
+		return fileUrl;
 		
 	}
 }

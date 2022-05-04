@@ -50,9 +50,9 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model, @Value("272") int jojo, String ryu) {
+	public String home(Locale locale, Model model, @Value("${jojo:272}") int jojo, String ryu) {
 
-		log.info("ryu? : " + ryu.substring(0)); //NullPointerException
+		// log.info("ryu? : " + ryu.substring(0)); //NullPointerException
 		
 		log.info("int jojo? : " + jojo);
 		log.info("driverName : " + driverName);
@@ -74,7 +74,7 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "ckUploadTest";
+		return "uploadCheck";
 	}
 	
 
