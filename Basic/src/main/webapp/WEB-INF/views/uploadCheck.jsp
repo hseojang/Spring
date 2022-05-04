@@ -21,7 +21,7 @@
 		const f_submit = ()=>{ // jQuery ajax 사용 파일 업로드
 			event.preventDefault();
 			
-			console.log(c_file.files);
+			console.log(c_file);
 			
 			
 			// let formData = new FormData(); // FormData 객체를 사용하면  multipart/form-data로 전송(자동으로 url-encoding에서 방식 바뀜)
@@ -61,7 +61,27 @@
 				if(c_xhr.status==200 && c_xhr.readyState==4) {
 					let l_img = document.createElement("img");
 					l_img.src = c_xhr.responseText; // responseText로 파일 URL이 반환됨
-					document.body.appendChild(l_img);
+					l_img.width = 50;
+					l_img.height = 50;
+					let l_a = document.createElement("a");
+					l_a.href = c_xhr.responseText;
+					let l_fileName = c_xhr.responseText.split("_")[1];
+					l_a.download = l_fileName; // 더 범용적으로 쓸 수 있는 방법은 이쪽
+					
+					// l_a.download = c_file.files[0].name; 
+					// a.download : 클릭 시 download에서 지정된 이름의 파일로 다운로드 됨(a 태그의 속성)
+					
+					// l_a.target = "_blank"; // 새창에서 열기
+					/*
+					l_a.onclick = function(){
+						event.preventDefault();
+						window.open(c_xhr.responseText, "", "width=200, height=200, left=50, top=50");
+					}
+					*/
+					
+					l_a.appendChild(l_img); // a태그로 img를 감싸 href img로 만듬
+					document.body.appendChild(l_a);
+					
 					console.log(c_xhr.responseText);
 				}
 			};
