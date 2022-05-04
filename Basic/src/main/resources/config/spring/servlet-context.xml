@@ -72,6 +72,13 @@
 	<context:component-scan
 		base-package="kr.or.basic" />
 
+	<!-- 인터셉터 등록법 -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/user/login"/>
+			<beans:bean class="kr.or.basic.interceptor.MyFirstInterceptor"/>
+		</interceptor>
+	</interceptors>
 
 </beans:beans>
 

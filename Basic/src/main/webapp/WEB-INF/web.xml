@@ -5,7 +5,7 @@
 	version="4.0">
 	<!-- The definition of the Root Spring Container shared by all Servlets 
 		and Filters -->
-	<!-- classpath는 소스 디텍토리를 가리키는 예약어 -->
+	<!-- classpath는 소스 디렉토리를 가리키는 예약어 -->
 	<!-- classpath는 현재 4곳, main.java, main/resource, test.java, test/resource -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
@@ -26,7 +26,7 @@
 			<param-name>contextConfigLocation</param-name>
 			<param-value>classpath:config/spring/servlet-context.xml</param-value>
 		</init-param>
-<!-- 		throwExceptionIfNoHandlerFound를 설정해주면 404일 때 익셉션을 던짐 -->
+		<!-- throwExceptionIfNoHandlerFound를 설정해주면 404일 때 익셉션을 던짐 -->
 		<init-param>
 			<param-name>throwExceptionIfNoHandlerFound</param-name>
 			<param-value>true</param-value>
@@ -51,8 +51,8 @@
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-	<!-- 한글설정 -->
 
+	<!-- 한글설정 -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -69,9 +69,28 @@
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-
 	<!-- 한글설정 END -->
 
+	<!-- 등록된 순서대로 실행됨 (= 필터체인 순서)-->
+	<filter>
+		<filter-name>myFirstFilter</filter-name>
+		<filter-class>kr.or.basic.filter.MyFirstFilter</filter-class>
+	</filter>
 
+	<filter-mapping>
+		<filter-name>myFirstFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+		<filter>
+		<filter-name>mySecondFilter</filter-name>
+		<filter-class>kr.or.basic.filter.MySecondFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>mySecondFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
 
 </web-app>

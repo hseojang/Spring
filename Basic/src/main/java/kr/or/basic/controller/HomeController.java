@@ -4,6 +4,8 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,12 +52,14 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model, @Value("${jojo:272}") int jojo, String ryu) {
+	public String home(Locale locale, Model model, @Value("${jojo:272}") int jojo, String ryu, HttpServletRequest req) {
 
-		// log.info("ryu? : " + ryu.substring(0)); //NullPointerException
+		// log.info("ryu? : " + ryu.substring(0)); //NullPointerException 발생시키기
 		
 		log.info("int jojo? : " + jojo);
 		log.info("driverName : " + driverName);
+		
+		log.info("필터 적용 되고있나? : {}", req.getAttribute("merong")); // log("msg {}", val) 형식, {}으로 val이 들어갈 자리 지정
 		
 		log.debug("이것은 디버깅");
 		log.info("이것은 인포");
