@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans:beans
-	xmlns="http://www.springframework.org/schema/mvc"
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:task="http://www.springframework.org/schema/task"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
@@ -59,8 +60,10 @@
 	<!-- 꼭 필요한 건 아닌 데 이런 것도 Bean이 된다는 걸 확인 차원에서 -->
 	<!-- 이렇게 쓰면 경로를 담은 String 객체를 autowired로 가져다 쓸 수 있다 -->
 	<beans:bean id="uploadPath" class="java.lang.String">
-		<beans:constructor-arg value="C:\Users\PC-13\git\repository_sts\Basic\src\main\webapp\resources\ckUpload"/>
-<!-- 		<beans:constructor-arg value="D:\Tools\apache-tomcat-9.0.60\webapps\Basic\resources\ckUpload" /> -->
+		<beans:constructor-arg
+			value="C:\Users\PC-13\git\repository_sts\Basic\src\main\webapp\resources\ckUpload" />
+		<!-- <beans:constructor-arg value="D:\Tools\apache-tomcat-9.0.60\webapps\Basic\resources\ckUpload" 
+			/> -->
 		<!-- 아래는 경로를 deploy한 apache tomcat에 맞추어 준 것 -->
 
 	</beans:bean>
@@ -69,16 +72,17 @@
 		class="org.springframework.web.multipart.support.StandardServletMultipartResolver"></beans:bean>
 
 	<beans:import resource="websocket-context.xml" />
-	<context:component-scan
-		base-package="kr.or.basic" />
 
 	<!-- 인터셉터 등록법 -->
 	<interceptors>
 		<interceptor>
-			<mapping path="/user/login"/>
-			<beans:bean class="kr.or.basic.interceptor.MyFirstInterceptor"/>
+			<mapping path="/user/login" />
+			<beans:bean
+				class="kr.or.basic.interceptor.MyFirstInterceptor" />
 		</interceptor>
 	</interceptors>
-
+	<!-- task 태그 사용 시 namespace 체크 필요함 -->
+	<context:component-scan base-package="kr.or.basic" />
+		<task:annotation-driven />
 </beans:beans>
 
