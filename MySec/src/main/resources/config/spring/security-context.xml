@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-5.2.xsd">
+
+	<!-- Web 보안 설정 -->
+	<!-- 순서가 중요함, 매핑이 겹칠 땐 더 작은 범주의 권한보안설정이 앞으로 가야한다(우선순위 식) -->
+	<security:http auto-config="true" use-expressions="true">
+		<security:intercept-url pattern="/fbi/all" access="permitAll" />
+		<security:intercept-url pattern="/fbi/member" access="hasRole('ROLE_MEMBER')" />
+		<security:intercept-url pattern="/fbi/admin" access="hasRole('ROLE_ADMIN')" />
+		<security:intercept-url pattern="/fbi/roze" access="hasRole('ROLE_ROZE')" />
+		<!-- access="hasRole('ROLE_MEMBER')" 멤버 롤 이상이어야 사이트 전체에 접근가능 해진다는 뜻 -->
+		<!-- 설정한 것 빼고 열기 이게 위로가면 전체가 다 열리는 상태로 아래에 기재된 권한들을 덧씌움 -->
+		<security:intercept-url pattern="/**" access="permitAll" />
+
+		<security:form-login login-page="/mylogin" />
+		<security:logout /> 
+		<!-- auto-config:"true" 사용 시에 자동으로 설정됨, 하지만 오토컨픽을 써도 직접 제어하는 편이 좋음 -->
+		<!-- 위 두 태그가 있어야 스프링 시큐리티가 기본제공하는 로그인 로그아웃 url의 POST 요청이 핸들됨  -->
+		
+		<security:csrf disabled="true"/> <!-- csrf 기능 잠시 막기  -->
+		
+	</security:http>
+
+	<!-- 인증 관리자 설정 -->
+	<security:authentication-manager>
+		<security:authentication-provider>
+	<!-- 일단 inMemory USER 설정으로 간단히 등록 -->
+			<security:user-service>
+			<security:user name="johyun" password="{noop}johyun" authorities="ROLE_ADMIN, ROLE_ROZE, ROLE_MEMBER"/>
+			<security:user name="roze" password="{noop}roze" authorities="ROLE_ROZE"/>
+	<!-- password인코더가 없으면 null 500 에러 뜸(스프링 5부터 필수) 인코딩 관련 설정은 {noop}으로 막을 수 있음 -->
+			</security:user-service>
+		</security:authentication-provider>
+	</security:authentication-manager>
+</beans>
