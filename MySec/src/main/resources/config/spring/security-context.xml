@@ -15,14 +15,15 @@
 		<!-- access="hasRole('ROLE_MEMBER')" 멤버 롤 이상이어야 사이트 전체에 접근가능 해진다는 뜻 -->
 		<!-- 설정한 것 빼고 열기 이게 위로가면 전체가 다 열리는 상태로 아래에 기재된 권한들을 덧씌움 -->
 		<security:intercept-url pattern="/**" access="permitAll" />
-
+		
+		<security:access-denied-handler error-page="/accessError"  />
 		<security:form-login login-page="/mylogin" />
-		<security:logout /> 
+		<security:logout invalidate-session="true" logout-url="/mylogout" /> 
 		<!-- auto-config:"true" 사용 시에 자동으로 설정됨, 하지만 오토컨픽을 써도 직접 제어하는 편이 좋음 -->
 		<!-- 위 두 태그가 있어야 스프링 시큐리티가 기본제공하는 로그인 로그아웃 url의 POST 요청이 핸들됨  -->
 		
-		<security:csrf disabled="true"/> <!-- csrf 기능 잠시 막기  -->
-		
+		<security:csrf disabled="false"/>
+
 	</security:http>
 
 	<!-- 인증 관리자 설정 -->

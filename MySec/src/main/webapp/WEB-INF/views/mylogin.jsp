@@ -12,6 +12,8 @@
 <form action="<%=request.getContextPath()%>/login" method="post">
 아이디 <input type="text" name="username" value=""><br>
 빕번 <input type="password" name="password" value=""><br>
+<!-- form의 method가 post인 경우에만 넣어줌(get 방식에는 문제 X), ajax 헤더에도 넣어야함 -->
+<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 <button>로그인</button>
 </form>
 

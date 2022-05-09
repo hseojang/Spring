@@ -6,7 +6,7 @@
 	<!-- The definition of the Root Spring Container shared by all Servlets 
 		and Filters -->
 	<!-- classpath는 소스 디렉토리를 가리키는 예약어 -->
-	<!-- classpath는 현재 4곳, main.java, main/resource, test.java, test/resource -->
+	<!-- classpath는 현재 4곳, main/java, main/resource, test/java, test/resource -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:config/spring/root-context.xml</param-value>
