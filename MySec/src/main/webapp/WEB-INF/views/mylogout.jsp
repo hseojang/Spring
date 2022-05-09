@@ -8,6 +8,7 @@
 </head>
 <body>
 <h1>나의 로그아웃 페이지</h1>
+<h2>${guest}님 안녕히 가세요</h2>
 <form id="id_form" action="<%=request.getContextPath()%>/mylogout" method="post">
 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 </form>
