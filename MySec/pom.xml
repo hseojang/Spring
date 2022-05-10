@@ -200,6 +200,7 @@
 			<scope>test</scope>
 		</dependency>
 
+
 		<!-- scheduler -->
 		<dependency>
 			<groupId>org.quartz-scheduler</groupId>
@@ -213,9 +214,9 @@
 			<version>2.3.2</version>
 		</dependency>
 
-	<!-- security -->
-	<!-- 스프링 시큐리티는 기본적으로 web, core, config, taglibs가 필요함. config와 taglibs만 설치하면 
-		의존관계상 나머지도 다시 설치됨 -->
+		<!-- security -->
+		<!-- 스프링 시큐리티는 기본적으로 web, core, config, taglibs가 필요함. config와 taglibs만 
+			설치하면 의존관계상 나머지도 다시 설치됨 -->
 		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-config -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
