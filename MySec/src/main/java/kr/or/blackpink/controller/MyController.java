@@ -42,4 +42,11 @@ public class MyController {
 		model.addAttribute("accessUser", "Roze");
 		return "rozeaccess";
 	}
+	
+	@GetMapping("/admin2") 
+	public String getAdmin2(Model model) {
+		log.info("admin_access");
+		model.addAttribute("accessUser", "Admin");
+		return "userDetailsCK";
+	}
 }
