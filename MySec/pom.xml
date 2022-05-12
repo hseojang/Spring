@@ -230,6 +230,20 @@
 			<version>5.2.15.RELEASE</version>
 		</dependency>
 
+		<!-- transaction, 트랜잭션이 필요한 것(datasource jdbc, mybatis) -->
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-tx -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>5.2.19.RELEASE</version>
+		</dependency>
+
+		<!-- sql 로거, ?을 값으로 보여줌 -->
+		<dependency>
+			<groupId>org.bgee.log4jdbc-log4j2</groupId>
+			<artifactId>log4jdbc-log4j2-jdbc4</artifactId>
+			<version>1.16</version>
+		</dependency>
 
 
 	</dependencies>

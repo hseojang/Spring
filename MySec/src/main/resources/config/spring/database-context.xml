@@ -3,9 +3,11 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd">
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 	<!-- 버전이 있으면 문제될 수 있으므로 지움(특히 스프링) -->
 	
 	<!-- properties 파일 위치 지정 -->
@@ -32,6 +34,18 @@
     	<property name="configLocation" value="classpath:config/mybatisConfig.xml"></property>
     	<property name="mapperLocations" value="classpath:mapper/**/*-Mapper.xml"></property>
 	</bean>
+	
+	<!-- Mapper 스캔할 패키지 설정 -->
 	<mybatis-spring:scan base-package="kr.or.blackpink.mapper"/>
 
+	<!-- 트랜잭션 매니저 등록 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<!-- 트랜잭션을 어노테이션으로 사용할 수 있도록 설정, 트랜잭션 매니저 필요함 -->
+	<tx:annotation-driven/>
+	<context:component-scan base-package="kr.or.blackpink"/>
+
+	
 </beans>

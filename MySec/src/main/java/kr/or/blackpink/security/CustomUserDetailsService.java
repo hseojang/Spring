@@ -22,7 +22,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 		
 		log.info("ckk{}" + username);
 		MemberVO memberVO = memberMapper.read(username); //security에서 username이라고 하는 것, 지금 테이블의 userid임
-		return memberVO == null ? null : new CustomUser(memberVO);
+		return memberVO == null ? null : new CustomUser(memberVO); // UserDetail 인터페이스에 해당할 User 구현체 상속 객체
 
 	}
 
