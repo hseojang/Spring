@@ -4,6 +4,7 @@
 	<typeAliases>
 	<typeAlias type="kr.or.blackpink.domain.MemberVO" alias="memberVO"/>
 	<typeAlias type="kr.or.blackpink.domain.AuthVO" alias="authVO"/>
+	<typeAlias type="kr.or.blackpink.domain.BoardVO" alias="boardVO"/>
 
 	</typeAliases>
 </configuration>

@@ -11,7 +11,7 @@
 	<properties>
 		<java-version>1.8</java-version>
 		<org.springframework-version>5.2.19.RELEASE</org.springframework-version>
-		<org.aspectj-version>1.6.10</org.aspectj-version>
+		<org.aspectj-version>1.9.9.1</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
 	<dependencies>
@@ -42,12 +42,21 @@
 		</dependency>
 
 
-		<!-- AspectJ -->
+		<!-- AOP AspectJ -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
 			<version>${org.aspectj-version}</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>${org.aspectj-version}</version>
+			<scope>runtime</scope>
+		</dependency>
+
 
 		<!-- DB관련 -->
 		<dependency>
@@ -245,6 +254,18 @@
 			<version>1.16</version>
 		</dependency>
 
+		<!-- 자바 메일 라이브러리 등록 -->
+		<!-- 보통은 메일 서버를 구축하거나 월 사용료를 내고 씀 -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.7</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
 
 	</dependencies>
 	<build>

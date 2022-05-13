@@ -1,10 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
-	
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+
+
+	<bean id="mailSender"
+		class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.naver.com" />
+		<property name="port" value="465" />
+		<property name="username" value="arepo0731" />
+		<property name="password" value="lunia0731" />
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.auth">true</prop>
+				<!-- <prop key="mail.smtp.starttls.enable">true</prop> --> <!-- SSL 사용시 없어도 됨 -->
+				<prop key="mail.smtps.ssl.checkserveridentity">true</prop> <!--HELO or EHLO 사용 -->
+				<!-- <prop key="mail.smtps.ssl.trust">*</prop> -->
+				<prop key="mail.debug">true</prop>               <!-- 메일서버 접속내용 로그 출력 -->
+				<prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop> <!-- SSL 사용 -->
+			</props>
+		</property>
+	</bean>
+
+	<!-- 이렇게 쓰면 AOP 어노테이션으로 제어 가능해짐 -->
+	<aop:aspectj-autoproxy />
+
 	<!-- Root Context: defines shared resources visible to all other web components -->
-		<import resource="database-context.xml"/>
-		<import resource="security-context.xml"/>
+	<import resource="database-context.xml" />
+	<import resource="security-context.xml" />
 
 </beans>

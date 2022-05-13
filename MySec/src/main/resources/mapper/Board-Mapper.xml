@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.blackpink.mapper.BoardMapper">
+
+
+	<resultMap type="boardVO" id="boardMap">
+		<id property="bdNo" column="userid" />
+		<result property="bdUsername" column="userid" />
+		<result property="bdPassword" column="password" />
+		<result property="bdTitle" column="username" />
+		<result property="bdContent" column="regdate" />
+		<result property="bdCategory" column="regdate" />
+		<result property="bdContent" column="regdate" />
+		<result property="bdCategory" column="regdate" />
+	</resultMap>
+
+	<resultMap type="authVO" id="authMap">
+		<result property="userid" column="userid" />
+		<result property="auth" column="authority" />
+	</resultMap>
+
+	<select id="getArticle" resultMap="boardMap">
+		select * from myboard where bdUsername = #{userid}
+	</select>
+	
+	
+</mapper>
