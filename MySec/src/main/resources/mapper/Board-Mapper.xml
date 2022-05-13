@@ -4,24 +4,50 @@
 
 
 	<resultMap type="boardVO" id="boardMap">
-		<id property="bdNo" column="userid" />
-		<result property="bdUsername" column="userid" />
-		<result property="bdPassword" column="password" />
-		<result property="bdTitle" column="username" />
-		<result property="bdContent" column="regdate" />
-		<result property="bdCategory" column="regdate" />
-		<result property="bdContent" column="regdate" />
-		<result property="bdCategory" column="regdate" />
-	</resultMap>
-
-	<resultMap type="authVO" id="authMap">
-		<result property="userid" column="userid" />
-		<result property="auth" column="authority" />
+		<id property="bdNo" column="BD_NO" />
+		<result property="bdNo" column="BD_NO" />
+		<result property="bdUsername" column="BD_USERNAME" />
+		<result property="bdPassword" column="BD_PASSWORD" />
+		<result property="bdTitle" column="BD_TITLE" />
+		<result property="bdContent" column="BD_CONTENT" />
+		<result property="bdCategory" column="BD_CATEGORY" />
+		<result property="bdCreatedDate" column="BD_CREATED_DATE" />
+		<result property="bdLastEdit" column="BD_LAST_EDIT" />
+		<result property="bdViews" column="BD_VIEWS" />
 	</resultMap>
 
 	<select id="getArticle" resultMap="boardMap">
-		select * from myboard where bdUsername = #{userid}
+		select * from myboard where
+		bd_username = #{userid}
+	</select>
+
+	<select id="getList" resultType="hashmap">
+		select * from myboard
 	</select>
 	
 	
+	<insert id="writeArticle" parameterType="boardVO">
+		insert into myboard 
+			(BD_NO, BD_USERNAME, BD_PASSWORD, BD_TITLE, BD_CONTENT,
+			 BD_CATEGORY, BD_CREATED_DATE, BD_LAST_EDIT, BD_VIEWS) 
+			 values 
+			 (('BD'||LPAD(seq_myboard.nextval, 5, '0')), #{bdUsername}, #{bdPassword}, #{bdTitle},
+			 #{bdContent}, #{bdCategory}, sysdate, sysdate, 0)
+	</insert>
+	
+	<update id="updateArticle" parameterType="boardVO">
+		update set
+		BD_USERNAME = #{bdUsername}, 
+		BD_PASSWORD = #{bdPassword}, 
+		BD_TITLE = #{bdTitle}, 
+		BD_CONTENT = #{bdContent}, 
+		BD_CATEGORY = #{bdCategory}, 
+		BD_LAST_EDIT = sysdate 
+		where BD_NO = #{bdNo}
+	</update>
+	
+	<delete id="deleteArticle" parameterType="String">
+		delete from myboard where bd_no = #{bdNo}
+	</delete>
+
 </mapper>

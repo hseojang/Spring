@@ -16,7 +16,7 @@ import kr.or.blackpink.service.EmailService;
 public class EmailController {
 
 	@Autowired
-	EmailService emailService;
+	private EmailService emailService;
 
 	@GetMapping("/write")
 	public String write() {

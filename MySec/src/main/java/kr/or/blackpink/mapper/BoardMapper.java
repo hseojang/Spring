@@ -13,7 +13,7 @@ public interface BoardMapper {
 	
 	public List<BoardVO> getList();
 	
-	public int createArticle(BoardVO boardVO);
+	public int writeArticle(BoardVO boardVO);
 	
 	public int updateArticle(BoardVO boardVO);
 	
