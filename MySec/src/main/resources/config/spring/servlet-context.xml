@@ -19,6 +19,9 @@
 		up static resources in the ${webappRoot}/resources directory -->
 	<!-- 정적인 리소스들의 경로를 쉽게 찾아갈 수 있도록 매핑하는 설정 -->
 	<resources mapping="/resources/**" location="/resources/" />
+		<resources mapping="/css/**" location="/resources/css/" />
+	<resources mapping="/js/**" location="/resources/js/" />
+	<resources mapping="/img/**" location="/resources/img/" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
 		in the /WEB-INF/views directory -->
