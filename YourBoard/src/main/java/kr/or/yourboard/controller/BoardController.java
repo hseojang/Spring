@@ -23,7 +23,7 @@ public class BoardController {
 	
 	@GetMapping("/write")
 	public String getWrite(Model model) {
-		return "write";
+		return "board/write";
 	}
 	
 	@PostMapping("/write")
@@ -36,28 +36,28 @@ public class BoardController {
 			model.addAttribute("error", "작성에 실패했습니다");
 		}
 		// return "list"; // 포워딩 방식
-		return "redirect:list"; // 리다이렉트 방식
+		return "redirect:list"; // 리다이렉트 방식은 Mapping된 URL을 기준으로 함
 	}
 	
 	@GetMapping("/list")
 	public String getList(Model model) {
 		List<BoardVO> boardList = boardService.selectBoardList();
 		model.addAttribute("boardList", boardList);
-		return "list";
+		return "board/list";
 	}
 	
 	@GetMapping("/content")
 	public String getList(Model model, int boardNo) {
 		BoardVO boardVO = boardService.selectBoard(boardNo);
 		model.addAttribute("vo", boardVO);
-		return "content";
+		return "board/content";
 	}
 	
 	@GetMapping("/edit")
 	public String getEdit(Model model, int boardNo) {
 		BoardVO boardVO = boardService.selectBoard(boardNo);
 		model.addAttribute("vo", boardVO);
-		return "edit";
+		return "board/edit";
 	}
 	
 	@PostMapping("/edit")
@@ -76,7 +76,23 @@ public class BoardController {
 		if (result != 1) {
 			model.addAttribute("error", "작성에 실패했습니다");
 		}
-		return "redirect:list"; // 리다이렉트 방식
+		return "redirect:board/list"; // 리다이렉트 방식
+	}
+	
+	@GetMapping("/index")
+	public String goIndex() {
+		// /web-inf/views/index.jsp로 forwarding
+		return "board/index";
+	}
+	
+	@GetMapping("/buttons")
+	public String goButtons() {
+		return "board/buttons";
+	}
+	
+	@GetMapping("/cards")
+	public String goCards() {
+		return "board/cards";
 	}
 	
 }
