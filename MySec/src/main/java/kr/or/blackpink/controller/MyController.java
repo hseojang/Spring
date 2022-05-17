@@ -18,7 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/fbi")
 @Slf4j
 public class MyController {
-
+	//t = new Date().getTime() / TimeUnit.SECONDS.toMillis(30);
 	@Autowired
 	private CustomUserDetailsService customUserDetailsService;
 	

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import kr.or.blackpink.service.GoogleOTPService;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -40,5 +41,8 @@ public class LogInOutController {
 		model.addAttribute("msg", "넌 여기오면 안돼!");
 		return "accessError";
 	}
+	
+
+	
 	
 }

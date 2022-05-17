@@ -267,6 +267,13 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
 
+		<!-- googleOTP용 코덱 라이브러리 -->
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.9</version>
+		</dependency>
+
 	</dependencies>
 	<build>
 		<plugins>

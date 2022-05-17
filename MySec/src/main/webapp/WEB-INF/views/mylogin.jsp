@@ -17,6 +17,6 @@
 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 <button>로그인</button>
 </form>
-
+<a href="${pageContext.request.contextPath}/otp/verify">OTPverify</a>
 </body>
 </html>
