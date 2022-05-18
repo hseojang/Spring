@@ -1,4 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 ​
-<div id="aside">aside영역</div>
+<div id="aside" class="SideBar">aside영역</div>

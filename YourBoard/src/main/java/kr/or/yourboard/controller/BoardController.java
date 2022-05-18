@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.or.yourboard.domain.BoardVO;
+import kr.or.yourboard.domain.PageCondDTO;
+import kr.or.yourboard.domain.PageDTO;
 import kr.or.yourboard.service.BoardService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -40,14 +42,18 @@ public class BoardController {
 	}
 	
 	@GetMapping("/list")
-	public String getList(Model model) {
-		List<BoardVO> boardList = boardService.selectBoardList();
+	public String getList(PageCondDTO pageCondDTO, Model model) { // Dependency Injection에 의해 빈 객체가 생성되고 받은 요청에 맞게 설정되어 주입
+		log.info("ck : " + pageCondDTO.getPageNum() + "번 페이지 / size : " + pageCondDTO.getPageSize());
+		int total = boardService.selectBoardCount();
+		PageDTO pageDTO = new PageDTO(pageCondDTO, total);
+		List<BoardVO> boardList = boardService.selectBoardPage(pageCondDTO);
 		model.addAttribute("boardList", boardList);
+		model.addAttribute("pageDTO", pageDTO);
 		return "board/list";
 	}
 	
 	@GetMapping("/content")
-	public String getList(Model model, int boardNo) {
+	public String getContent(Model model, int boardNo) {
 		BoardVO boardVO = boardService.selectBoard(boardNo);
 		model.addAttribute("vo", boardVO);
 		return "board/content";

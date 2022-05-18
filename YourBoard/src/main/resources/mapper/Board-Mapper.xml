@@ -2,7 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.yourboard.mapper.BoardMapper">
 <insert id="insertBoard" parameterType="boardVO">
-insert into tb_board(board_no, board_title, board_writer, board_content) values (seq_board.nextval, #{boardTitle}, #{boardWriter}, #{boardContent})
+insert into tb_board(board_no, board_title, board_writer, board_content) 
+values (seq_board.nextval, #{boardTitle}, #{boardWriter}, #{boardContent})
 </insert>
 
 <update id="updateBoard" parameterType="boardVO">
@@ -23,7 +24,24 @@ delete from tb_board where board_no = #{boardNo}
 select * from tb_board where board_no = #{boardNo}
 </select>
 
+<select id="selectBoardPage" resultType="boardVO" parameterType="pageCondDTO">
+<![CDATA[
+select board_no, board_title, board_writer, board_content, board_regdate 
+from 
+	(select rownum as myrownum, board_no, board_title, board_writer, board_content, board_regdate 
+	from tb_board 
+	where rownum<=#{pageNum}*#{pageSize}) 
+where myrownum>(#{pageNum}-1)*#{pageSize}
+]]>
+</select>
+
 <select id="selectBoardList" resultType="boardVO">
 select * from tb_board
 </select>
+
+<select id="selectBoardCount" resultType="int">
+select count(*) from tb_board
+</select>
+
+
 </mapper>

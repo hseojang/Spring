@@ -34,6 +34,7 @@ public class BoardMapperTest {
 	private BoardMapper boardMapper;
 
 	@Test
+	@Disabled
 	public void selectListTest() {
 		List<BoardVO> boardList = new ArrayList<BoardVO>();
 		// Assertions.assertInstanceOf(boardList.getClass(), boardMapper.selectBoardList());
@@ -62,15 +63,15 @@ public class BoardMapperTest {
 	
 	
 	@Test
-	@Disabled
+	//@Disabled
 	public void updateTest() {
 		BoardVO vo; // 테스트용 VO 객체
-		for (int i = 1; i <= 15; i++) {
+		for (int i = 200; i <= 100; i++) {
 			vo = new BoardVO();
 			vo.setBoardNo(i);
-			vo.setBoardTitle("제목수정됨" + i);
-			vo.setBoardWriter("진짜작가" + i);
-			vo.setBoardContent("진짜최종내용");
+			vo.setBoardTitle("진짜제목수정됨" + i);
+			vo.setBoardWriter("가짜개발자" + i);
+			vo.setBoardContent("가짜최종내용");
 
 			Assertions.assertEquals(1, boardMapper.updateBoard(vo));
 		}
@@ -81,11 +82,11 @@ public class BoardMapperTest {
 	@DisplayName("mapperInsert") // 테스트 창에 보여줄 이름 지정 가능
 	public void insertTest() {
 		BoardVO vo; // 테스트용 VO 객체
-		for (int i = 1; i <= 15; i++) {
+		for (int i = 700; i <= (800); i++) {
 			vo = new BoardVO();
-			vo.setBoardTitle("제목" + i);
-			vo.setBoardWriter("대충작가" + i);
-			vo.setBoardContent("대충내용");
+			vo.setBoardTitle("개발개발" + i);
+			vo.setBoardWriter("글쓴이" + i);
+			vo.setBoardContent("개발!!!");
 
 			Assertions.assertEquals(1, boardMapper.insertBoard(vo));
 		}
