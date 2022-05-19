@@ -9,8 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div>${otpMap.url}</div>
-	<div>${otpMap.encodedKey}</div>
+
 	<div id="id_qr"></div>
 	<img alt="" src="${otpMap.url}">
 

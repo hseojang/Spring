@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.yourboard.mapper.ReplyMapper">
+
+<insert id="insertReply" parameterType="replyVO">
+insert into tb_reply 
+values (seq_reply.nextval, 
+		#{boardNo}, 
+		#{replyTitle}, 
+		#{replyWriter}, 
+		#{replyWriter}, 
+		sysdate)
+</insert>
+
+<update id="updateReply" parameterType="replyVO">
+update tb_reply 
+set reply_title=#{replyTitle}, 
+	reply_writer=#{replyWriter}, 
+	reply_content=#{replyWriter} 
+where reply_no=#{replyNo}
+</update>
+
+<delete id="deleteReply" parameterType="int">
+delete from tb_reply where reply_no=#{replyNo}
+</delete>
+
+<select id="selectReply" parameterType="int" resultType="replyVO">
+select * from tb_reply where reply_no=#{replyNo}
+</select>
+
+<select id="selectReplyList" resultType="replyVO">
+select * from tb_reply
+</select>
+
+<select id="selectBoardReply" parameterType="int" resultType="replyVO">
+select * from tb_reply where board_no=#{boardNo} order by reply_no desc
+</select>
+
+</mapper>

@@ -19,11 +19,13 @@ import org.springframework.stereotype.Service;
 
 import kr.or.blackpink.domain.OtpVO;
 import kr.or.blackpink.mapper.OtpMapper;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author PC-13
  *
  */
+@Slf4j
 @Service
 public class GoogleOTPService {
 
