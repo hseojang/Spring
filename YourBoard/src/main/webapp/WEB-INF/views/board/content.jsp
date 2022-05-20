@@ -246,6 +246,7 @@ padding : 5px;
 		v_btnSendReply.onclick = f_sendReply;
 
 		var f_deleteReply = function(p_replyNo) {
+			// get으로 하면 간단하지만 보안이 좋지 않음
 			v_data = {
 				"replyNo" : p_replyNo
 			};
