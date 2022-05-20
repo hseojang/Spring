@@ -24,6 +24,12 @@
 			<param-value>classpath:config/spring/servlet-context.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
+	<multipart-config>
+		<location>C:\\upload\\temp</location> <!-- 메모리 초과시 파일 임시저장소 -->
+		<max-file-size>20971520</max-file-size> <!-- 파일 최대용량 -->
+		<max-request-size>41943040</max-request-size> <!-- 요청용량 최대 -->
+		<file-size-threshold>20971520</file-size-threshold> <!-- 메모리상 최대용량 -->
+	</multipart-config>
 	</servlet>
 		
 	<servlet-mapping>

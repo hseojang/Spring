@@ -8,7 +8,7 @@ values (seq_reply.nextval,
 		#{boardNo}, 
 		#{replyTitle}, 
 		#{replyWriter}, 
-		#{replyWriter}, 
+		#{replyContent}, 
 		sysdate)
 </insert>
 
@@ -16,7 +16,7 @@ values (seq_reply.nextval,
 update tb_reply 
 set reply_title=#{replyTitle}, 
 	reply_writer=#{replyWriter}, 
-	reply_content=#{replyWriter} 
+	reply_content=#{replyContent} 
 where reply_no=#{replyNo}
 </update>
 
