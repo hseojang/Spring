@@ -23,7 +23,7 @@ public class ReplyServiceImpl implements ReplyService {
 	@Override
 	public int updateReply(ReplyVO replyVO) {
 
-		return replyMapper.insertReply(replyVO);
+		return replyMapper.updateReply(replyVO);
 	}
 
 	@Override

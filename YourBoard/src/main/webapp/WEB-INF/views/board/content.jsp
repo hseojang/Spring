@@ -74,6 +74,15 @@ padding : 5px;
 .msg {
 	color: red;
 }
+
+.hiddenBtn {
+	display: none;
+}
+
+.VisibleBtn {
+	display: inline-block; 
+}
+
 </style>
 </head>
 <body>
@@ -106,14 +115,14 @@ padding : 5px;
 
 	</table>
 	<h3>댓글</h3>
-	<div id="id_replylist"></div>
+	<div id="id_replylist" width="50em"></div>
 	<div id="id_replyFormDiv">
-		<form action="" method="post" id="id_replyForm">
+		<form action="" method="" id="id_replyForm">
 			<input type="hidden" value="${vo.boardNo}" name="boardNo"> <input
 				type="text" placeholder="작성자" name="replyWriter" value=""> <input
 				type="text" placeholder="제목" name="replyTitle" value=""> <input
 				type="text" placeholder="내용" name="replyContent" value=""> <input
-				type="submit" value="작성" id="id_btnSendReply">
+				type="button" value="작성" id="id_btnSendReply">
 		</form>
 	</div>
 
@@ -162,6 +171,7 @@ padding : 5px;
 						v_replyDiv.setAttribute("class", "reply");
 						v_replyDiv.innerHTML = "<form id='id_replyNo"+replyArr[i].replyNo
 								+"' action=''><div class='containerHor'>"
+								+ "<input type='hidden' name='replyNo' value='" + replyArr[i].replyNo + "'>"
 								+ "<input type='text' name='replyWriter' class='replyFormRead replyFormWriter' value='" 
 								+ replyArr[i].replyWriter + "' readonly='readonly'><div class='containerVer'>"
 								+ "<input type='text' name='replyTitle' class='replyFormRead replyFormTitle' value='"
@@ -172,7 +182,8 @@ padding : 5px;
 								+ replyArr[i].replyNo
 								+ ")'>"
 								+ "<input type='button' value='수정' id='id_btnEditReply' onclick='f_editReplyOn("
-								+ replyArr[i].replyNo + ")'></div>" + "</form>";
+								+ replyArr[i].replyNo + ")'><button class='hiddenBtn' id='id_btnSubmitNo"
+								+ replyArr[i].replyNo + "'>확인</button></div></form>";
 
 						v_replylist.appendChild(v_replyDiv);
 					}
@@ -211,7 +222,8 @@ padding : 5px;
 
 			if (p_json.method == "post") {
 				// xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-				console.log(p_json.data);
+				console.log("data: " + p_json.data);
+				console.log("url: " + p_json.url);
 				xhr.send(p_json.data);
 				// 여기서 리턴하면 success가 실행 안될 것 같아서 일단 else 사용
 			} else {
@@ -224,8 +236,9 @@ padding : 5px;
 		var f_sendReply = function() {
 			event.preventDefault(); // 이벤트 막기
 			var v_formData = new FormData(v_replyForm);
-			console.log(v_replyForm);
-			console.log(v_replyForm.elements);
+			//console.log(v_replyForm);
+			//console.log(v_replyForm.elements);
+			console.log("insert 불림")
 
 			var v_json = {
 				method : "post",
@@ -269,11 +282,11 @@ padding : 5px;
 		};
 
 		var f_editReplyOn = function(p_replyNo) {
-			var targetFormSelector = "#id_replyNo" + p_replyNo
+			var targetInputSelector = "#id_replyNo" + p_replyNo
 					+ " input.replyFormRead";
 			var targetBtnSelector = "#id_replyNo" + p_replyNo
 			+ " input[type='button']";
-			var targetInputArr = document.querySelectorAll(targetFormSelector);
+			var targetInputArr = document.querySelectorAll(targetInputSelector);
 			var targetInputBtn = document.querySelectorAll(targetBtnSelector);
 			for (var i=0; i<targetInputArr.length; i++) {
 				targetInputArr[i].readOnly = "";
@@ -283,20 +296,26 @@ padding : 5px;
 				targetInputBtn[i].style.visibility = "hidden";
 
 			}
-			var submitBtn = document.createElement("input");
-			submitBtn.value="확인";
+			var submitBtn = document.querySelector("#id_btnSubmitNo"+p_replyNo);
+			submitBtn.setAttribute("class", "visibleBtn");
+			submitBtn.onclick = f_editReplySubmit.bind(document, p_replyNo);
 			console.log(targetInputBtn);
 			
 
 		}
 
-		var f_editReplySubmit = function(p_formData) {
-
+		var f_editReplySubmit = function(p_replyNo) {
+			event.preventDefault();
+			console.log("f_editReplySubmit 불림");
+			var targetFormId = "#id_replyNo" + p_replyNo;
+			var targetForm = document.querySelector(targetFormId);
+			var v_formData = new FormData(targetForm);
+			console.log(targetForm);
 			var v_json = {
 				method : "post",
 				url : "${replyPath}/edit",
-				async : "true",
-				data : p_formData,
+				async : true,
+				data : v_formData,
 				success : function(p_data) {
 					if (p_data) {
 						alert(p_data);

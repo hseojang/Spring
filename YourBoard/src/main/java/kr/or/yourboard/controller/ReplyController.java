@@ -49,6 +49,7 @@ public class ReplyController {
 	@ResponseBody
 	@PostMapping(value="/insert")
 	public String postNewReply( ReplyVO replyVO) {
+		log.info("insert 컨트롤러 불림");
 		log.info(replyVO.toString());
 
 		String msg = "";
@@ -73,9 +74,12 @@ public class ReplyController {
 	@ResponseBody
 	@PostMapping(value="/edit")
 	public String updateReply(ReplyVO replyVO) {
-
+		log.info("update 컨트롤러 불림");
+		log.info(replyVO.toString());
+		
 		String msg = "";
-		if(replyService.updateReply(replyVO)<=0) {
+		int rslt = replyService.updateReply(replyVO);
+		if(rslt<=0) {
 			msg = "댓글 수정에 실패했습니다.";
 		}
 		return msg;
