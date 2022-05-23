@@ -254,7 +254,15 @@
 			<version>1.16</version>
 		</dependency>
 
-		<!-- 자바 메일 라이브러리 등록 -->
+		<!-- hibernate-validator(유효성 검증기) -->
+		<dependency>
+			<groupId>org.hibernate.validator</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>6.2.3.Final</version>
+		</dependency>
+
+
+		<!-- 자바 메일 라이브러리 -->
 		<!-- 보통은 메일 서버를 구축하거나 월 사용료를 내고 씀 -->
 		<dependency>
 			<groupId>javax.mail</groupId>

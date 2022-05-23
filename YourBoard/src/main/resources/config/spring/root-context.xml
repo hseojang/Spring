@@ -8,6 +8,13 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<import resource="database-context.xml" />
 
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basename" value="classpath:/META-INF/messages"></property>
+	</bean>
+	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+		<property name="validationMessageSource" ref="messageSource"></property>
+	</bean>
+
 	<!-- 패키지 전부를 스캔하기보다 어떤 패키지에서 컴포넌트를 찾을 것인지 지정하는 게 더 효율적 -->
 	<context:component-scan base-package="kr.or.yourboard.service"/>
 	<context:component-scan base-package="kr.or.yourboard.domain" />

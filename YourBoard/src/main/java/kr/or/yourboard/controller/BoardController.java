@@ -2,9 +2,12 @@ package kr.or.yourboard.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,9 +32,22 @@ public class BoardController {
 	}
 	
 	@PostMapping("/write")
-	public String postWrite(Model model, BoardVO boardVO) {
+	public String postWrite(Model model, @Valid BoardVO boardVO, Errors errors) { 
+		//@Valid : required는 클라이언트단에서의 검증, Valid 어노테이션은 Validator를 이용한 서버단 검증
+		// 유효성을 검증할 변수의 클래스에 무엇을 검증할 것인지 명시해야한다
+		
+		// Validator가 Errors 타입 객체에 발생한 오류를 자동으로 담아줌
+		// 단! 매개변수 순서로 검증할 VO/DTO 다음에 작성해야 함
+		// Validator를 쓴다고 클라이언트 단에서의 검증이 필요 없는 것은 아님
+		// 서버에서의 Validator는 부수적인 것
+		
 		log.info("check : " + boardVO.toString());
-		// model.addAttribute("vo", boardVO); 값 넘겨줄때
+		
+		if(errors.hasErrors()) {
+			return "board/write";
+		}
+		
+		// model.addAttribute("vo", boardVO); // Model로 값 넘기기
 		int result = boardService.insertBoard(boardVO);
 		
 		if (result != 1) {
@@ -76,14 +92,16 @@ public class BoardController {
 		return "redirect:list"; // 리다이렉트 방식
 	}
 	
-	@GetMapping("/delete")
-	public String getDelete(Model model, int boardNo) {
+	
+	@PostMapping("/delete")
+	public String postDelete(Model model, int boardNo) {
 		int result = boardService.deleteBoard(boardNo);
 		if (result != 1) {
 			model.addAttribute("error", "작성에 실패했습니다");
 		}
-		return "redirect:board/list"; // 리다이렉트 방식
+		return "redirect:list"; // 리다이렉트 방식
 	}
+	
 	
 	@GetMapping("/index")
 	public String goIndex() {

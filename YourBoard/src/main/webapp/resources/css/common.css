@@ -20,7 +20,7 @@
 .SideBar{
 	width: 10%;
 	height: 600px;
-	background-color: #FFBB00;
+	box-shadow: 0 0 0 3px  #FFBB00 inset;
 	float: left;
 }
 
@@ -32,9 +32,9 @@
 }
 
 .Header{
-	background-color: #ABF200;
+	box-shadow: 0 0 0 3px #ABF200 inset;
 }
 
 .Footer{
-	background-color: #FF00DD;
+	box-shadow: 0 0 0 3px #FF00DD inset;
 }
