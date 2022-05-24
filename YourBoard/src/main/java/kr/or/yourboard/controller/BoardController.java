@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -28,11 +29,20 @@ public class BoardController {
 	
 	@GetMapping("/write")
 	public String getWrite(Model model) {
-		return "board/write";
+		
+		// @ModelAttribute : 원래 command 객체였음
+		// 스프링 폼 태그를 사용한 jsp를 불러올 때 컨트롤러에 적어주지 않으면 
+		// Neither BindingResult nor plain target object for bean name 'command' available as request attribute.
+		// 익셉션 발생
+		
+		// 현재 코드에서는 처음 get으로 접근할 때 일반 페이지(write.jsp)를 불러오고 post로 전송할 때 validation을 거쳐
+		// 에러가 발생하면 메시지를 띄울 수 있도록 write2.jsp를 호출하도록 되어있음
+		
+		return "board/write"; // spring form 태그를 사용하지 않은 페이지
 	}
 	
 	@PostMapping("/write")
-	public String postWrite(Model model, @Valid BoardVO boardVO, Errors errors) { 
+	public String postWrite(@ModelAttribute("vo") @Valid BoardVO boardVO, Errors errors, Model model) { 
 		//@Valid : required는 클라이언트단에서의 검증, Valid 어노테이션은 Validator를 이용한 서버단 검증
 		// 유효성을 검증할 변수의 클래스에 무엇을 검증할 것인지 명시해야한다
 		
@@ -43,8 +53,8 @@ public class BoardController {
 		
 		log.info("check : " + boardVO.toString());
 		
-		if(errors.hasErrors()) {
-			return "board/write";
+		if(errors.hasErrors()) { // Validator 검증 결과 에러가 발생했다면
+			return "board/write2"; // spring form 태그를 넣은 쓰기 뷰 페이지로
 		}
 		
 		// model.addAttribute("vo", boardVO); // Model로 값 넘기기

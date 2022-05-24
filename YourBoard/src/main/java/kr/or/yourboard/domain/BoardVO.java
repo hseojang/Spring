@@ -20,9 +20,9 @@ public class BoardVO {
 	
 	@NotBlank // 컨트롤러에서 @Valid가 있을 때에만 체크함에 유의
 	private String boardTitle;
-	@NotBlank
+	@NotBlank(message = "작성자를 입력하세요")
 	private String boardWriter;
-	@NotBlank
+	@NotBlank(message = "내용이 없슴니다")
 	private String boardContent;
 	private Date boardRegdate;
 	private Date boardUpdate;
