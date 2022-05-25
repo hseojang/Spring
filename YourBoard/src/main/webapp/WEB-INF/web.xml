@@ -37,6 +37,19 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	
+	<!-- Servlet Filter -->
+	
+	<!-- put, delete 등의 hidden method를 사용하려면 필요한 필터 -->
+	<filter>
+    	<filter-name>httpFilter</filter-name>
+    	<filter-class>
+    		org.springframework.web.filter.HiddenHttpMethodFilter
+    	</filter-class>
+	</filter>
+	<filter-mapping>
+    	<filter-name>httpFilter</filter-name>
+    	<servlet-name>appServlet</servlet-name>
+	</filter-mapping>
 	
 	<!-- 한글설정 -->
 	<filter>
