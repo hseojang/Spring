@@ -123,12 +123,7 @@ public class EmailReceiveService {
 				System.out.println("\t From: " + from);
 				System.out.println("\t Subject: " + subject);
 				System.out.println("\t Received: " + sentDate);
-				//System.out.println("\t Message: " + messageContent);
-				Document doc = Jsoup.parse(messageContent);
-				Element link = doc.select("section").first();
-				String parsedInnerHTML = doc.text();
-				//String parsedStr = link.html();
-				System.out.println("\t Message Parsed: " + parsedInnerHTML);
+				System.out.println("\t Message: " + messageContent);
 				System.out.println("\t Attachments: " + attachFiles);
 			}
 

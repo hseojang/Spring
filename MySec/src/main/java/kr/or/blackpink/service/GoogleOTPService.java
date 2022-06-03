@@ -38,6 +38,7 @@ public class GoogleOTPService {
 
 	
 	/**
+	 * 사용자의 비밀키를 생성해서 DB에 저장하는 메서드
 	 * @param userid 로그인 한 계정 id
 	 * @param host 호스트네임(사이트 도메인을 써야하지만 일단 임의로 정함)
 	 * @return 
@@ -113,10 +114,11 @@ public class GoogleOTPService {
 		// 암호화된 키를 다시 복호화
 		byte[] decodedKey = codec.decode(encodedKey);
 
-		// window는 시간 범주를 가리키는 변수임. 현재 대략 4분 정도로 설정되어 있는 것 같음...
+		// window는 시간 범주를 가리키는 변수임. = 30초
 		// 지정된 window의 크기만큼 OTP 생성 번호가 유효함
 		int window = 3;
 		// 시간 범위만큼 생성된 해시값을 전부 비교
+		// 아래에서 설정한 time이 30초 단위의 시간이므로 앞뒤로 3*30초 = 1분 30초씩 비교하게됨
 		for (int i = -window; i <= window; ++i) {
 			long hash = verify_code(decodedKey, time + i);
 
@@ -166,7 +168,7 @@ public class GoogleOTPService {
 		String key = otpMapper.selectKey(userid);
 		long code = inputCode;
 		long time = new Date().getTime() / TimeUnit.SECONDS.toMillis(30);
-
+		// 30초 단위로 쪼갠 시간
 		try {
 			
 			return check_code(key, code, time);
